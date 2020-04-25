@@ -20,15 +20,16 @@ export class StackRoute extends Component<any, any> {
     return (
       <Stack.Navigator
         headerMode='none'
-        initialRouteName='SignIn'
+        initialRouteName='Drawer'
         screenOptions={{ 
           //header: props => <Header /> 
         }}
       >
 
+        <Stack.Screen name='Drawer' component={Drawer} />
         <Stack.Screen name='SignUp' component={SignUp} />
-        <Stack.Screen name='SignIn' component={SignIn} />
-        <Stack.Screen name='Products' component={Products} />
+        {/* <Stack.Screen name='SignIn' component={SignIn} />
+        <Stack.Screen name='Products' component={Products} /> */}
 
       </Stack.Navigator>
     );

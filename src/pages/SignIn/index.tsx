@@ -16,8 +16,10 @@ type State = {
 const SignIn:React.FC = (props:any) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+
   const isFocused = useIsFocused();
-  const { setLogged } = useContext(MainContext);
+
+  const { logged, setLogged } = useContext(MainContext);
 
   function handleChangeInput(input: string, text: string) {
     switch(input) {
@@ -53,48 +55,53 @@ const SignIn:React.FC = (props:any) => {
     }
   }
 
-  return (
-    <View style={styles.container}>
+  if ( logged ) {
+    props.navigation.navigate('Products');
+    return null;
+  } else {
+    return (
+      <View style={styles.container}>
 
-      <View style={{flexDirection:'row', alignItems:'center'}}>
-        <Entypo name='shop' size={30} color='#0074C3'/>
-        <Text style={styles.title}>E-Commerce</Text>
-      </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Entypo name='shop' size={30} color='#0074C3' />
+          <Text style={styles.title}>E-Commerce</Text>
+        </View>
 
-      <View style={styles.formContainer}>
+        <View style={styles.formContainer}>
 
-        <Text style={styles.textInput}>Login:</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType='email-address'
-          autoCapitalize='none'
-          onChangeText={(text) => setLogin(text)}
-        />
+          <Text style={styles.textInput}>Login:</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType='email-address'
+            autoCapitalize='none'
+            onChangeText={(text) => setLogin(text)}
+          />
 
-        <Text style={styles.textInput}>Password:</Text>
-        <TextInput
-          style={styles.input}
-          secureTextEntry={true}
-          onChangeText={(text) => setPassword(text)}
-        />
+          <Text style={styles.textInput}>Password:</Text>
+          <TextInput
+            style={styles.input}
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+          />
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 15 }]}
+            onPress={async () => await handleLogin()}
+          >
+            <Text style={styles.textButton}>Fazer Login</Text>
+          </TouchableOpacity>
+
+        </View>
 
         <TouchableOpacity
-          style={[styles.button, { marginTop: 15 }]}
-          onPress={async () =>  await handleLogin() }
+          style={[styles.button, { marginBottom: 30 }]}
+          onPress={() => props.navigation.navigate('SignUp')}
         >
-          <Text style={styles.textButton}>Fazer Login</Text>
+          <Text style={styles.textButton}>Cadastrar</Text>
         </TouchableOpacity>
-
       </View>
-
-      <TouchableOpacity
-        style={[styles.button, { marginBottom: 30 }]}
-        onPress={() => props.navigation.navigate('SignUp') }
-      >
-        <Text style={styles.textButton}>Cadastrar</Text>
-      </TouchableOpacity>
-    </View>
-  );
+    );
+  }
 }
 
 export default SignIn;

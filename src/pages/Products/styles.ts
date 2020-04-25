@@ -8,6 +8,8 @@ export default StyleSheet.create({
     marginTop: StatusBar.currentHeight,
   },
 
+  loading: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+
   header:{
     flexDirection:'row',
     alignItems:'center',

@@ -4,6 +4,8 @@ import Constants from '../utils/Constants';
 
 import api from '../services/api';
 
+import { UserInterface } from '../models/Interfaces';
+
 class Authentication {
 
   private async getToken() {
@@ -33,11 +35,14 @@ class Authentication {
   }
 
   public async signIn(login: string, password: string) {
+    console.log('requisitou login');
     try {
       if (login && password) {
         const response = await api.post('/user/login', { login, password });
-
         const token:string = response.data?.token;
+
+        console.log('token ' + token);
+
         await this.setToken( token );
       }
     } catch (error){
@@ -51,6 +56,28 @@ class Authentication {
       return !(await this.getToken());
     }
     return false;
+  }
+
+  public async register(data: UserInterface){
+    console.log('requisitou registo');
+    try {
+      console.log(data);
+
+      const response = await api.post('/user/customer/add', data);
+      const token:string = response.data?.token;
+
+      console.log(token);
+
+      if (token) {
+        this.setToken(token);
+        return token;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
 }
 

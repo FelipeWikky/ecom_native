@@ -16,7 +16,7 @@ export class DrawerRoute extends Component<any, any> {
 
     return (
       <Drawer.Navigator
-      //initialRouteName= 'Login' //
+      initialRouteName= 'Products' //
       >
 
         {this.props.logged ?
@@ -34,7 +34,7 @@ export class DrawerRoute extends Component<any, any> {
           drawerIcon: () => (this.props.logged ? <FontAwesome name='sign-out' size={25} /> : <FontAwesome name='sign-in' size={25} />),
         }} />
 
-        {this.props.logged ?
+        {/* {this.props.logged ?
           null
           :
           <Drawer.Screen name='SignUp' component={SignUp} options={{
@@ -42,7 +42,7 @@ export class DrawerRoute extends Component<any, any> {
             title: 'Cadastrar',
             drawerIcon: () => <FontAwesome name='arrow-circle-o-up' size={25} />,
           }} />
-        }
+        } */}
 
       </Drawer.Navigator>
     );
