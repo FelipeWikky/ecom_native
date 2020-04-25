@@ -2,12 +2,20 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 
-import Routes from './src/routes';
+import Routes from './src/routes/index';
+
+import {MainProvider} from './src/contexts/MainContext';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Routes />
+
+      <MainProvider>
+
+        <Routes />
+        
+      </MainProvider>
+
     </NavigationContainer>
   );
 }
