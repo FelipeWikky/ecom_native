@@ -1,8 +1,6 @@
-import Reactfrom from 'react';
 import { AsyncStorage } from 'react-native';
 
 import Constants from '../utils/Constants';
-import MainContext from '../contexts/MainContext';
 
 import api from '../services/api';
 
@@ -20,7 +18,6 @@ class Authentication {
   private async setToken(token: string) {
     if (token && token !== '') {
       await AsyncStorage.setItem(Constants.TOKEN_STORAGE, token);
-      //console.log( await this.getToken() );
       return true;
     }
 
@@ -28,7 +25,8 @@ class Authentication {
   }
 
   public async isLogged() {
-    if ( await this.getToken() ) {
+    const token = await this.getToken();
+    if ( token ) {
       return true;
     }
     return false;

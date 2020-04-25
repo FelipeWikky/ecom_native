@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 
 const styles = StyleSheet.create({
   container:{
@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'space-between',
     backgroundColor:'#DDD',
+    marginTop: StatusBar.currentHeight,
   },
 
   title:{
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     height:22,
     width:300,
     maxWidth:'50%',
-
+    textAlign:'center',
     borderWidth: Number(`${StyleSheet.hairlineWidth}`) ,
     borderRadius:3,
     borderColor:'#AAA',

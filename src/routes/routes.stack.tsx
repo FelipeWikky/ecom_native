@@ -1,12 +1,18 @@
-import React, {Component, ReactNode} from 'react';
+import React, {Component, ReactNode, useContext} from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Drawer from './routes.drawer';
 
+import Products from '../pages/Products';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
+
+import MainContext from '../contexts/MainContext';
+
 import Header from '../components/Header';
 
-export default class RouteStack extends Component {
+export class StackRoute extends Component<any, any> {
   render(): ReactNode {
 
     const Stack = createStackNavigator();
@@ -14,15 +20,25 @@ export default class RouteStack extends Component {
     return (
       <Stack.Navigator
         headerMode='none'
-        initialRouteName='Drawer'
+        initialRouteName='SignIn'
         screenOptions={{ 
-          header: props => <Header /> 
+          //header: props => <Header /> 
         }}
       >
 
-        <Stack.Screen name='Drawer' component={Drawer} />
+        <Stack.Screen name='SignUp' component={SignUp} />
+        <Stack.Screen name='SignIn' component={SignIn} />
+        <Stack.Screen name='Products' component={Products} />
 
       </Stack.Navigator>
     );
   }
 }
+
+const Route = () => {
+  const { logged } = useContext(MainContext);
+  return(
+    <StackRoute logged={logged}/>
+  );
+}
+export default Route;
