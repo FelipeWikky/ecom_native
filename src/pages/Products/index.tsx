@@ -44,8 +44,8 @@ export default class Products extends Component<any, State> {
     this.setState({loaded:false});
 
     try {
-      // const response = await axios.get('http://example-ecommerce.herokuapp.com/product/list');
-      const response = await api.get('/product/list');
+      const response = await axios.get('http://example-ecommerce.herokuapp.com/product/list');
+      //const response = await api.get('/product/list');
       this.setState({ data: response.data, loaded: true });
     } catch (error) {
       console.log(error);

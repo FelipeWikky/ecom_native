@@ -4,6 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from './styles';
 
+import { currencyBR as currencyMask } from '../../utils/Currency';
+
 type FactoryType = {
   id: number,
   name: string,
@@ -43,7 +45,13 @@ export default class Product extends Component<Props, State> {
           <View style={styles.titleContainer}>
 
             <Text style={styles.title}>
-              {data.name} - R$ {data.price}
+              {data.name} - R${data.price}
+              {/* {
+                Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(data.price)
+              } */}
             </Text>
 
             <View>
@@ -59,8 +67,8 @@ export default class Product extends Component<Props, State> {
 
         {this.state.expansive?
           <View>
-            <Text style={styles.describe}>Disponível: {data.amount} unidades</Text>
-            <Text style={styles.describe}>Fabricante: {data.factory.name}</Text>
+            <Text style={styles.describe}>Disponível: <Text style={{fontWeight:'bold'}}>{data.amount}</Text> unidades</Text>
+            <Text style={styles.describe}>Fabricante: <Text style={{fontWeight:'bold'}}>{data.factory.name}</Text> </Text>
           </View>
         :
           null  
