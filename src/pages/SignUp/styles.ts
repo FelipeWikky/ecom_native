@@ -3,21 +3,30 @@ import { StyleSheet, StatusBar } from 'react-native';
 export default StyleSheet.create({
   container:{
     flex:1,
-    marginTop: StatusBar.currentHeight,
     backgroundColor: '#DDD',
-    padding:10,
-    paddingHorizontal:30,
   },
+
+  titleHeader:{
+  fontSize: 30,
+  fontWeight: '500',
+  color: '#0074C3',
+  marginLeft: 10,
+},
 
   title:{
     fontSize:20,
     textAlign:'center',
     padding:5,
 
-    marginBottom:-1,
+    marginBottom:-2,
 
-    borderWidth: 1,
-    borderRadius: 5,
+    borderTopWidth:1,
+    borderLeftWidth:1,
+    borderRightWidth:1,
+    
+    borderTopLeftRadius:5,
+    borderTopRightRadius:5,
+
     borderColor: '#AAA',
   },
 
@@ -25,7 +34,7 @@ export default StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     borderWidth:1,
-    borderRadius:5,
+    borderRadius:3,
     borderColor:'#AAA',
     padding:5,
   },

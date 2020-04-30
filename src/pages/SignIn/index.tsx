@@ -5,6 +5,8 @@ import { Entypo } from '@expo/vector-icons';
 
 import styles from './styles';
 
+import Header from '../../components/Header';
+
 import User from '../../models/User';
 import MainContext from '../../contexts/MainContext';
 
@@ -61,11 +63,16 @@ const SignIn:React.FC = (props:any) => {
   } else {
     return (
       <View style={styles.container}>
-
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Entypo name='shop' size={30} color='#0074C3' />
-          <Text style={styles.title}>E-Commerce</Text>
-        </View>
+        
+        <Header 
+          title='Login'
+          titleComponent={
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Entypo name='shop' size={30} color='#0074C3' />
+              <Text style={styles.title}>E-Commerce</Text>
+            </View>
+          }
+        />
 
         <View style={styles.formContainer}>
 

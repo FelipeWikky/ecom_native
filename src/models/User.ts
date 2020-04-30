@@ -61,9 +61,18 @@ class Authentication {
   public async register(data: UserInterface){
     console.log('requisitou registo');
     try {
-      console.log(data);
+      const { address, age, email, name, userPassword } = data;
 
-      const response = await api.post('/user/customer/add', data);
+      //const response = await api.post('/user/customer/add', data);
+
+      const response = await api.post('/user/customer/add', {
+        address,
+        age,
+        email,
+        name,
+        userPassword
+      });
+
       const token:string = response.data?.token;
 
       console.log(token);

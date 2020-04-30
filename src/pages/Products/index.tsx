@@ -5,6 +5,7 @@ import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import styles from './styles';
 
 import Product from '../../components/Product';
+import Header from '../../components/Header';
 
 import api from '../../services/api';
 import axios from 'axios';
@@ -46,7 +47,11 @@ export default class Products extends Component<any, State> {
     try {
       const response = await axios.get('http://example-ecommerce.herokuapp.com/product/list');
       //const response = await api.get('/product/list');
-      this.setState({ data: response.data, loaded: true });
+      
+      if (response.data) {
+        this.setState({ data: response.data, loaded: true });
+      }
+
     } catch (error) {
       console.log(error);
     }
@@ -55,25 +60,16 @@ export default class Products extends Component<any, State> {
   render(): ReactNode {
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableWithoutFeedback
-            onPress={() => this.props.navigation.openDrawer()}
-          >
-            <View style={[styles.icon, { marginLeft: -4 }]}>
-              <FontAwesome name='list' size={30} color='#AAA' />
-            </View>
-          </TouchableWithoutFeedback>
+        <Header 
+          title='Produtos'
+          titleComponent={<Text style={styles.title}>Produtos disponíveis</Text>}
 
-          <Text style={styles.title}>Produtos disponíveis</Text>
+          leftButtonIcon={<FontAwesome name='list' size={30} color='#AAA' />}
+          leftButtonPress={() => this.props.navigation.openDrawer() }
 
-          <TouchableWithoutFeedback
-            onPress={async () => this.requestData()}
-          >
-            <View style={styles.icon}>
-              <MaterialIcons name='refresh' size={33} color='#AAA' />
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+          rightButtonIcon={<MaterialIcons name='refresh' size={33} color='#AAA' />}
+          rightButtonPress={async () => await this.requestData() }
+         />
 
         {this.state.loaded ?
           <View>
