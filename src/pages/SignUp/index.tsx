@@ -29,6 +29,10 @@ const SignUp: FC = (props: any) => {
       return;
     }
 
+    if (Number(age) < 18) {
+      setError({ error: true, message: 'Só aceitamos maiores de 18' });
+    }
+
     if (password != passwordConfirm) {
       setError({ error: true, message: 'As Senhas informadas precisam coincidir' });
       return;
@@ -62,10 +66,10 @@ const SignUp: FC = (props: any) => {
           <Text style={styles.titleHeader}> Cadastro </Text>
         }
         leftButtonIcon={<AntDesign name='back' size={30} />}
-        leftButtonPress={() => props.navigation.goBack() }
+        leftButtonPress={() => props.navigation.goBack()}
       />
 
-      <View style={{paddingHorizontal:30, marginTop:10,}} >
+      <View style={{ paddingHorizontal: 30, marginTop: 10, }} >
 
         <Text style={styles.title}>Informe seus Dados para Cadastro</Text>
 
