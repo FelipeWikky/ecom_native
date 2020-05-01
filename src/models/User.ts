@@ -39,9 +39,9 @@ class Authentication {
     try {
       if (login && password) {
         const response = await api.post('/user/login', { login, password });
-        const token:string = response.data?.token;
 
-        console.log('token ' + token);
+        const token:string = response.data;
+
 
         await this.setToken( token );
       }
@@ -64,16 +64,17 @@ class Authentication {
       const { address, age, email, name, userPassword } = data;
 
       //const response = await api.post('/user/customer/add', data);
-
       const response = await api.post('/user/customer/add', {
-        address,
-        age,
-        email,
-        name,
-        userPassword
+        address:address,
+        age:age,
+        email:email,
+        name:name,
+        userPassword:userPassword
       });
 
-      const token:string = response.data?.token;
+      console.log(response.data);
+
+      const token:string = response.data;
 
       console.log(token);
 
@@ -83,6 +84,7 @@ class Authentication {
       } else {
         return null;
       }
+
     } catch (error) {
       console.log(error);
       return null;

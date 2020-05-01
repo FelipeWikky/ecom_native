@@ -1,5 +1,5 @@
-import React, {useState, useContext, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useContext, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons';
 
@@ -15,7 +15,7 @@ type State = {
   password: string,
 }
 
-const SignIn:React.FC = (props:any) => {
+const SignIn: React.FC = (props: any) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,7 +24,7 @@ const SignIn:React.FC = (props:any) => {
   const { logged, setLogged } = useContext(MainContext);
 
   function handleChangeInput(input: string, text: string) {
-    switch(input) {
+    switch (input) {
       case 'login':
         setLogin(text);
         break;
@@ -35,8 +35,10 @@ const SignIn:React.FC = (props:any) => {
   }
 
   useEffect(() => {
-    async function verifyLogout(){
-      if ( await User.isLogged() && isFocused == true ) {
+    props.navigation.openDrawer();
+    
+    async function verifyLogout() {
+      if (await User.isLogged() && isFocused == true) {
         await User.signOut();
         setLogged(false);
         console.log('Deslogando...');
@@ -46,7 +48,7 @@ const SignIn:React.FC = (props:any) => {
 
   }, [isFocused]);
 
-  async function handleLogin(){
+  async function handleLogin() {
     await User.signIn(login, password);
 
     const logged = await User.isLogged();
@@ -57,14 +59,14 @@ const SignIn:React.FC = (props:any) => {
     }
   }
 
-  if ( logged ) {
+  if (logged) {
     props.navigation.navigate('Products');
     return null;
   } else {
     return (
       <View style={styles.container}>
-        
-        <Header 
+
+        <Header
           title='Login'
           titleComponent={
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -75,28 +77,30 @@ const SignIn:React.FC = (props:any) => {
         />
 
         <View style={styles.formContainer}>
+          
+            <Text style={styles.textInput}>Login:</Text>
+            <TextInput
+              style={styles.input}
+              keyboardType='email-address'
+              autoCapitalize='none'
+              onChangeText={(text) => setLogin(text)}
+            />
 
-          <Text style={styles.textInput}>Login:</Text>
-          <TextInput
-            style={styles.input}
-            keyboardType='email-address'
-            autoCapitalize='none'
-            onChangeText={(text) => setLogin(text)}
-          />
+            <Text style={styles.textInput}>Password:</Text>
+            <TextInput
+              style={styles.input}
+              autoCapitalize='none'
+              autoCorrect={false}
+              secureTextEntry={true}
+              onChangeText={(text) => setPassword(text)}
+            />
 
-          <Text style={styles.textInput}>Password:</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
-            onChangeText={(text) => setPassword(text)}
-          />
-
-          <TouchableOpacity
-            style={[styles.button, { marginTop: 15 }]}
-            onPress={async () => await handleLogin()}
-          >
-            <Text style={styles.textButton}>Fazer Login</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, { marginTop: 15 }]}
+              onPress={async () => await handleLogin()}
+            >
+              <Text style={styles.textButton}>Fazer Login</Text>
+            </TouchableOpacity>
 
         </View>
 

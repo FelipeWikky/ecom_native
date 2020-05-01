@@ -23,7 +23,7 @@ export default class Header extends Component<HeaderInterface, any> {
         <TouchableWithoutFeedback
           onPress={async () => await leftButtonPress()}
         >
-          <View style={[styles.icon, { marginLeft: -4 }]}>
+          <View style={[styles.icon]}>
             {leftButton}
           </View>
         </TouchableWithoutFeedback>
@@ -32,7 +32,7 @@ export default class Header extends Component<HeaderInterface, any> {
           this.props.titleComponent 
         :
           <View> 
-            <Text>{this.props.title}</Text> 
+            <Text>{title}</Text> 
           </View>
         }
 

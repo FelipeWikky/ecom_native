@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import { FlatList, View, Text, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
+import { FlatList, View, Text, ActivityIndicator } from 'react-native';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
 import styles from './styles';

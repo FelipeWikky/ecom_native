@@ -1,11 +1,13 @@
 import React, { FC, useContext, useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 import styles from './styles';
 
 import Header from '../../components/Header';
 
 import User from '../../models/User';
+
 import { UserInterface, ErrorInterface } from '../../models/Interfaces';
 
 import MainContext from '../../contexts/MainContext';
@@ -41,6 +43,8 @@ const SignUp: FC = (props: any) => {
       userPassword: password
     }
 
+    console.log(user);
+
     const token = await User.register(user);
 
     if (token) {
@@ -57,6 +61,8 @@ const SignUp: FC = (props: any) => {
         titleComponent={
           <Text style={styles.titleHeader}> Cadastro </Text>
         }
+        leftButtonIcon={<AntDesign name='back' size={30} />}
+        leftButtonPress={() => props.navigation.goBack() }
       />
 
       <View style={{paddingHorizontal:30, marginTop:10,}} >
@@ -110,6 +116,8 @@ const SignUp: FC = (props: any) => {
                 <TextInput
                   style={styles.input}
                   keyboardType='email-address'
+                  autoCapitalize='none'
+                  autoCorrect={false}
                   onChangeText={setEmail}
                 />
               </View>
@@ -149,7 +157,3 @@ const SignUp: FC = (props: any) => {
   );
 }
 export default SignUp;
-
-//const { name, age, address, email,  user:{password} } = req.body;
-
-// <Button title='cadastrar' onPress={ ()=> this.props.navigation.navigate('Drawer') } />
